@@ -23,30 +23,38 @@ let direction = true;
 let rainbowColor = false;
 
 // functions section
-// if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-// true for mobile device
-// wrapper.innerHTML = `<h1>Sorry, this site is currently not available on mobile devices.</h1>`;
-// } else {
-// false for not mobile device
-function draw(e) {
-	if (!isDrawing) return; //only run when drawing
-	ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
-	ctx.beginPath();
-	// Start from :
-	ctx.moveTo(lastX, lastY);
-	// Go to:
-	ctx.lineTo(e.offsetX, e.offsetY);
-	ctx.stroke();
-	[lastX, lastY] = [e.offsetX, e.offsetY];
+if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+	// true for mobile device
+	// wrapper.innerHTML = `<h1>Sorry, this site is currently not available on mobile devices.</h1>`;
+	window.addEventListener("load", function () {
+		ctx.fillStyle = "blue";
+		canvas.addEventListener("pointermove", paint, false);
 
-	if (rainbowColor === true) {
-		hue++;
-		if (hue >= 360) {
-			hue = 0;
+		function paint(event) {
+			ctx.fillRect(event.clientX, event.clientY, 5, 5);
+		}
+	});
+} else {
+	// false for not mobile device
+	function draw(e) {
+		if (!isDrawing) return; //only run when drawing
+		ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+		ctx.beginPath();
+		// Start from :
+		ctx.moveTo(lastX, lastY);
+		// Go to:
+		ctx.lineTo(e.offsetX, e.offsetY);
+		ctx.stroke();
+		[lastX, lastY] = [e.offsetX, e.offsetY];
+
+		if (rainbowColor === true) {
+			hue++;
+			if (hue >= 360) {
+				hue = 0;
+			}
 		}
 	}
 }
-// }
 
 const clear = () => ctx.clearRect(0, 0, canvas.width, canvas.height);
 
