@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Canvas</title>
+		<link href="/css/style.css" rel="stylesheet" />
+	</head>
+	<body>
+		<div class="container">
+			<div class="wrapper">
+				<button type="button" id="clearBtn" onClick="download()">Clear canvas</button>
+				<!-- Slider for line width -->
+				<label for="width" class="widthPicker"
+					>Line width -
+					<input
+						type="range"
+						id="width"
+						min="1"
+						max="100"
+						value="25"
+						oninput="ctx.lineWidth = this.value"
+					/>
+					+
+				</label>
+
+				<a id="download" download="canvas.png">
+					<button type="button" id="downloadBtn" onClick="download()">Download</button>
+				</a>
+
+				<!-- slider for hue-->
+				<div>
+					<label for="hue" class="colorPicker">
+						Hue
+						<input type="range" id="hue" min="1" max="360" value="1" oninput="hue = this.value" />
+					</label>
+				</div>
+				<input type="button" value="🌈" class="btn__rainbow" />
+			</div>
+
+			<canvas id="draw" width="800" height="800" class="canvas"></canvas>
+		</div>
+		<script src="js/index.js"></script>
+	</body>
+</html>
