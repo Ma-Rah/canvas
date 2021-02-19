@@ -1,6 +1,8 @@
+// Variables section
 const canvas = document.querySelector("#draw");
 const ctx = canvas.getContext("2d");
-const button = document.querySelector("#clearBtn");
+const clearBtn = document.querySelector("#clearBtn");
+const downloadBtn = document.querySelector("#downloadBtn");
 const width = document.querySelector("#width");
 const rainbow = document.querySelector(".btn__rainbow");
 const wrapper = document.querySelector(".wrapper");
@@ -20,11 +22,10 @@ let hue = 0;
 let direction = true;
 let rainbowColor = false;
 
-const clear = () => ctx.clearRect(0, 0, canvas.width, canvas.height);
-
+// functions section
 if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
 	// true for mobile device
-	wrapper.innerHTML = `<h1>Sorry, this site is currently not available on mobile devices.</h1>`;
+	// wrapper.innerHTML = `<h1>Sorry, this site is currently not available on mobile devices.</h1>`;
 } else {
 	// false for not mobile device
 	function draw(e) {
@@ -47,30 +48,35 @@ if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
 	}
 }
 
-width.addEventListener("onchange", () => console.log("yes"));
-colorPicker.addEventListener("input", () => (colorPicker.style.color = `hsl(${hue}, 100%, 50%)`));
-button.addEventListener("click", clear);
-
-rainbow.addEventListener("click", () => {
-	rainbowColor = !rainbowColor ? true : false;
-	rainbow.classList.toggle("rainbow--toggled");
-});
-
-// mouse listeners
-canvas.addEventListener("mousedown", (e) => {
-	isDrawing = true;
-	[lastX, lastY] = [e.offsetX, e.offsetY];
-});
-
-canvas.addEventListener("mousemove", draw);
-canvas.addEventListener("mouseup", () => (isDrawing = false));
-canvas.addEventListener("mouseout", () => (isDrawing = false));
+const clear = () => ctx.clearRect(0, 0, canvas.width, canvas.height);
 
 function download() {
-	var download = document.getElementById("download");
-	var image = document
+	const download = document.getElementById("download");
+	const image = document
 		.getElementById("draw")
 		.toDataURL("image/png")
 		.replace("image/png", "image/octet-stream");
 	download.setAttribute("href", image);
 }
+
+// event listeners section
+canvas.addEventListener("mousedown", (e) => {
+	isDrawing = true;
+	[lastX, lastY] = [e.offsetX, e.offsetY];
+});
+
+colorPicker.addEventListener("input", () => (colorPicker.style.color = `hsl(${hue}, 100%, 50%)`));
+clearBtn.addEventListener("click", clear);
+downloadBtn.addEventListener("click", download);
+canvas.addEventListener("mousemove", draw);
+canvas.addEventListener("mouseup", () => (isDrawing = false));
+canvas.addEventListener("mouseout", () => (isDrawing = false));
+
+canvas.addEventListener("touchstart", draw);
+canvas.addEventListener("touchmove", () => (isDrawing = false));
+canvas.addEventListener("touchend", () => (isDrawing = false));
+
+rainbow.addEventListener("click", () => {
+	rainbowColor = !rainbowColor ? true : false;
+	rainbow.classList.toggle("rainbow--toggled");
+});

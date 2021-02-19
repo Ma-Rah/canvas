@@ -10,10 +10,10 @@
 	<body>
 		<div class="container">
 			<div class="wrapper">
-				<button type="button" id="clearBtn" onClick="download()">Clear canvas</button>
+				<button type="button" id="clearBtn" class="btn">Clear canvas</button>
 				<!-- Slider for line width -->
-				<label for="width" class="widthPicker"
-					>Line width -
+				<label for="width"
+					>Line Width -
 					<input
 						type="range"
 						id="width"
@@ -26,13 +26,13 @@
 				</label>
 
 				<a id="download" download="canvas.png">
-					<button type="button" id="downloadBtn" onClick="download()">Download</button>
+					<button type="button" id="downloadBtn">Save image</button>
 				</a>
 
 				<!-- slider for hue-->
 				<div>
 					<label for="hue" class="colorPicker">
-						Hue
+						Line Color
 						<input type="range" id="hue" min="1" max="360" value="1" oninput="hue = this.value" />
 					</label>
 				</div>
