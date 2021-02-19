@@ -30,16 +30,16 @@
 				</a>
 
 				<!-- slider for hue-->
-				<div>
-					<label for="hue" class="colorPicker">
-						Line Color
-						<input type="range" id="hue" min="1" max="360" value="1" oninput="hue = this.value" />
-					</label>
-				</div>
+
+				<label for="hue" class="colorPicker">
+					Line Color
+					<input type="range" id="hue" min="1" max="360" value="1" oninput="hue = this.value" />
+				</label>
+
 				<input type="button" value="🌈" class="btn__rainbow" />
 			</div>
 
-			<canvas id="draw" class="canvas" width="800" height="800"></canvas>
+			<canvas id="draw" class="canvas" width="1000" height="1000"></canvas>
 		</div>
 		<script src="js/index.js"></script>
 	</body>

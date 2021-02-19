@@ -24,16 +24,71 @@ let rainbowColor = false;
 
 // functions section
 if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+	const state = {
+		mousedown: false,
+	};
+
+	canvas.addEventListener("mousedown", handleWritingStart);
+	canvas.addEventListener("mousemove", handleWritingInProgress);
+	canvas.addEventListener("mouseup", handleDrawingEnd);
+	canvas.addEventListener("mouseout", handleDrawingEnd);
+
+	canvas.addEventListener("touchstart", handleWritingStart);
+	canvas.addEventListener("touchmove", handleWritingInProgress);
+	canvas.addEventListener("touchend", handleDrawingEnd);
+
+	function handleWritingStart(event) {
+		event.preventDefault();
+
+		const mousePos = getMosuePositionOnCanvas(event);
+		ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+		ctx.beginPath();
+		ctx.moveTo(mousePos.x, mousePos.y);
+
+		ctx.fill();
+
+		state.mousedown = true;
+	}
+
+	function handleWritingInProgress(event) {
+		event.preventDefault();
+
+		if (state.mousedown) {
+			const mousePos = getMosuePositionOnCanvas(event);
+			if (rainbowColor === true) {
+				hue++;
+				if (hue >= 360) {
+					hue = 0;
+				}
+			}
+			ctx.lineTo(mousePos.x, mousePos.y);
+
+			ctx.stroke();
+		}
+	}
+
+	function handleDrawingEnd(event) {
+		event.preventDefault();
+
+		if (state.mousedown) {
+			ctx.stroke();
+		}
+
+		state.mousedown = false;
+	}
+
+	function getMosuePositionOnCanvas(event) {
+		const clientX = event.clientX || event.touches[0].clientX;
+		const clientY = event.clientY || event.touches[0].clientY;
+		const { offsetLeft, offsetTop } = event.target;
+		const canvasX = clientX - offsetLeft;
+		const canvasY = clientY - offsetTop;
+
+		return { x: canvasX, y: canvasY };
+	}
+
 	// true for mobile device
 	// wrapper.innerHTML = `<h1>Sorry, this site is currently not available on mobile devices.</h1>`;
-	window.addEventListener("load", function () {
-		ctx.fillStyle = "blue";
-		canvas.addEventListener("pointermove", paint, false);
-
-		function paint(event) {
-			ctx.fillRect(event.clientX, event.clientY, 5, 5);
-		}
-	});
 } else {
 	// false for not mobile device
 	function draw(e) {
