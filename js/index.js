@@ -117,8 +117,8 @@ function download() {
 	const download = document.getElementById("download");
 	const image = document
 		.getElementById("draw")
-		.toDataURL("image/png")
-		.replace("image/png", "image/octet-stream");
+		.toDataURL("image/jpg")
+		.replace("image/jpg", "image/octet-stream");
 	download.setAttribute("href", image);
 }
 
