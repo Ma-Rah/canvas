@@ -10,33 +10,35 @@
 	<body>
 		<div class="container">
 			<div class="wrapper">
-				<a id="download" download="canvas.png">
-					<button type="button" id="downloadBtn">Save image</button>
-				</a>
+				<div class="div1">
+					<a id="download" download="canvas.png">
+						<button type="button" id="downloadBtn">Save image</button>
+					</a>
+					<button type="button" id="clearBtn" class="btn">Clear canvas</button>
 
-				<button type="button" id="clearBtn" class="btn">Clear canvas</button>
-				<!-- Slider for line width -->
-				<label for="width"
-					>Line Width -
-					<input
-						type="range"
-						id="width"
-						min="1"
-						max="100"
-						value="25"
-						oninput="ctx.lineWidth = this.value"
-					/>
-					+
-				</label>
+					<input type="button" value="🌈" class="btn__rainbow" />
+				</div>
+				<div class="div2">
+					<!-- Slider for line width -->
+					<label for="width"
+						>Line Width
+						<input
+							type="range"
+							id="width"
+							min="1"
+							max="100"
+							value="25"
+							oninput="ctx.lineWidth = this.value"
+						/>
+					</label>
 
-				<!-- slider for hue-->
+					<!-- slider for hue-->
 
-				<label for="hue" class="colorPicker">
-					Line Color
-					<input type="range" id="hue" min="1" max="360" value="1" oninput="hue = this.value" />
-				</label>
-
-				<input type="button" value="🌈" class="btn__rainbow" />
+					<label for="hue" class="colorPicker">
+						Line Color
+						<input type="range" id="hue" min="1" max="360" value="1" oninput="hue = this.value" />
+					</label>
+				</div>
 			</div>
 
 			<canvas id="draw" class="canvas" width="1000" height="1000"></canvas>
