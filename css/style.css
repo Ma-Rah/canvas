@@ -21,10 +21,7 @@ body {
 .wrapper {
 	padding: 1rem;
 	border-bottom: 5px solid black;
-	/* display: flex;
-	flex-flow: column nowrap;
-	justify-content: space-around;
-	align-items: center; */
+
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
 	grid-template-rows: 1fr;
@@ -39,9 +36,16 @@ label {
 	align-items: center;
 }
 
-button {
+.btn {
+	border: none;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 1em;
+	margin: 2px;
 	cursor: pointer;
-	font-size: 1.2rem;
 }
 
 input {
@@ -54,13 +58,23 @@ input:focus {
 
 .btn__rainbow {
 	color: rgb(0, 0, 0);
-	font-weight: bold;
-	font-size: 1.5rem;
-	border-radius: 5px;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 2px 2px;
 	cursor: pointer;
-	width: 150px;
 }
 
 .rainbow--toggled {
 	background: linear-gradient(to right, orange, yellow, green, cyan, blue, violet);
+}
+
+#downloadBtn {
+	background-color: #008cba;
+}
+
+#clearBtn {
+	background-color: #f44336;
 }
